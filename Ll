@@ -1,0 +1,264 @@
+_G.MeeTsuoAutoBountySettings = {
+    Melee = {
+        Enable = true, 
+        Z = {Enable = true, HoldTime = 0.1}, -- HoldTime --> 0.1second can KeyPressHold/TapHold
+        X = {Enable = true, HoldTime = 0.1},
+        C = {Enable = true, HoldTime = 0.1},
+        Delay = 1.5 -- Weapons Switch Delay
+    },
+
+    Sword = {
+        Enable = true,
+        Z = {Enable = true, HoldTime = 0.1},
+        X = {Enable = true, HoldTime = 0.1},
+        Delay = 1
+    },
+
+    Gun = {
+        Enable = true,
+        Z = {Enable = true, HoldTime = 0.1},
+        X = {Enable = true, HoldTime = 0.1},
+        Delay = 1,
+        GunMode = false
+    },
+
+    Fruit = {
+        Enable = true,
+        Z = {Enable = true, HoldTime = 0.1},
+        X = {Enable = true, HoldTime = 0.1},
+        C = {Enable = true, HoldTime = 0.1},
+        V = {Enable = false, HoldTime = 0.1}, -- false If V Skill Is Transform Fruits
+        F = {Enable = true, HoldTime = 0.1},
+        Delay = 1
+    }
+}
+
+local Setting = _G.MeeTsuoAutoBountySettings
+
+function down(use, wait)
+    pcall(function()
+        if lp.Character and lp.Character:FindFirstChild("HumanoidRootPart") then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, use, false, game.Players.LocalPlayer.Character.HumanoidRootPart)
+            task.wait((wait or 0.1))
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, use, false, game.Players.LocalPlayer.Character.HumanoidRootPart)
+        end
+    end)
+end
+
+local p = game.Players
+local lp = p.LocalPlayer
+local rs = game:GetService("RunService")
+local hb = rs.Heartbeat
+local rends = rs.RenderStepped
+
+function equip(tooltip)
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:wait()
+    
+    for _, item in pairs(player.Backpack:GetChildren()) do
+        if item:IsA("Tool") and item.ToolTip == tooltip then
+            local humanoid = character:FindFirstChildOfClass("Humanoid")
+            if humanoid and not humanoid:IsDescendantOf(item) then
+                game.Players.LocalPlayer.Character.Humanoid:EquipTool(item)
+                return true
+            end
+        end
+    end
+    return false
+end
+getgenv().weapon = nil
+spawn(function()
+    while task.wait() do
+        pcall(function()
+            if Macro then                                
+                for _, v in pairs(lp.Character:GetChildren()) do
+                    if v:IsA("Tool") then                        
+                        if v.ToolTip == "Melee" and Setting.Melee.Enable then
+	                        getgenv().weapon = "Melee"
+	                        equip("Melee")
+                            local skillGui = lp.PlayerGui.Main.Skills[v.Name]
+                            if skillGui:FindFirstChild("Z")
+                                and skillGui.Z.Cooldown.AbsoluteSize.X <= 0
+                                and Setting.Melee.Z.Enable then                              
+                                down("Z", Setting.Melee.Z.HoldTime)
+                            elseif skillGui:FindFirstChild("X")
+                                and skillGui.X.Cooldown.AbsoluteSize.X <= 0
+                                and Setting.Melee.X.Enable then                               
+                                down("X", Setting.Melee.X.HoldTime)
+                            elseif skillGui:FindFirstChild("C")
+                                and skillGui.C.Cooldown.AbsoluteSize.X <= 0
+                                and Setting.Melee.C.Enable then                               
+                                down("C", Setting.Melee.C.HoldTime)
+                            else
+                            end
+                        end
+                        if v.ToolTip == "Gun" and Setting.Gun.Enable then
+	                        getgenv().weapon = "Gun"
+	                        equip("Gun")
+                            local skillGui = lp.PlayerGui.Main.Skills[v.Name]
+                            if skillGui:FindFirstChild("Z")
+                                and skillGui.Z.Cooldown.AbsoluteSize.X <= 0
+                                and Setting.Gun.Z.Enable then                               
+                                down("Z", Setting.Gun.Z.HoldTime)
+                            elseif skillGui:FindFirstChild("X")
+                                and skillGui.X.Cooldown.AbsoluteSize.X <= 0
+                                and Setting.Gun.X.Enable then                               
+                                down("X", Setting.Gun.X.HoldTime)
+                            end
+                        end
+                        if v.ToolTip == "Sword" and Setting.Sword.Enable then
+	                        getgenv().weapon = "Sword"
+	                        equip("Sword")
+                            local skillGui = lp.PlayerGui.Main.Skills[v.Name]
+                            if skillGui:FindFirstChild("Z")
+                                and skillGui.Z.Cooldown.AbsoluteSize.X <= 0
+                                and Setting.Sword.Z.Enable then                                
+                                down("Z", Setting.Sword.Z.HoldTime)
+                            elseif skillGui:FindFirstChild("X")
+                                and skillGui.X.Cooldown.AbsoluteSize.X <= 0
+                                and Setting.Sword.X.Enable then                                
+                                down("X", Setting.Sword.X.HoldTime)
+                            else
+                            end
+                        end
+                        if v.ToolTip == "Blox Fruit" and Setting.Fruit.Enable then
+	                        getgenv().weapon = "Blox Fruit"
+	                        equip("Blox Fruit")
+                            local skillGui = lp.PlayerGui.Main.Skills[v.Name]
+                            if skillGui:FindFirstChild("Z")
+                                and skillGui.Z.Cooldown.AbsoluteSize.X <= 0
+                                and Setting.Fruit.Z.Enable then                               
+                                down("Z", Setting.Fruit.Z.HoldTime)
+                            elseif skillGui:FindFirstChild("X")
+                                and skillGui.X.Cooldown.AbsoluteSize.X <= 0
+                                and Setting.Fruit.X.Enable then                                
+                                down("X", Setting.Fruit.X.HoldTime)
+                            elseif skillGui:FindFirstChild("C")
+                                and skillGui.C.Cooldown.AbsoluteSize.X <= 0
+                                and Setting.Fruit.C.Enable then                                
+                                down("C", Setting.Fruit.C.HoldTime)
+                            elseif skillGui:FindFirstChild("V")
+                                and skillGui.V.Cooldown.AbsoluteSize.X <= 0
+                                and Setting.Fruit.V.Enable then                                
+                                down("V", Setting.Fruit.V.HoldTime)
+                            elseif skillGui:FindFirstChild("F")
+                                and skillGui.F.Cooldown.AbsoluteSize.X <= 0
+                                and Setting.Fruit.F.Enable then                                
+                                down("F", Setting.Fruit.F.HoldTime)
+                            end
+                        end
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+-- Gui creation
+local player = game.Players.LocalPlayer
+local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+gui.Name = "MacroGUI"
+
+local frame = Instance.new("Frame", gui)
+frame.Size = UDim2.new(0, 400, 0, 300)
+frame.Position = UDim2.new(0.5, -200, 0.5, -150)
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+
+local textbox = Instance.new("TextBox", frame)
+textbox.Size = UDim2.new(1, -20, 0, 100)
+textbox.Position = UDim2.new(0, 10, 0, 10)
+textbox.PlaceholderText = "Enter macro here"
+textbox.TextWrapped = true
+textbox.ClearTextOnFocus = false
+
+local saveBtn = Instance.new("TextButton", frame)
+saveBtn.Size = UDim2.new(0.3, 0, 0, 40)
+saveBtn.Position = UDim2.new(0.05, 0, 0, 120)
+saveBtn.Text = "Save Macro"
+
+local removeBtn = Instance.new("TextButton", frame)
+removeBtn.Size = UDim2.new(0.3, 0, 0, 40)
+removeBtn.Position = UDim2.new(0.4, 0, 0, 120)
+removeBtn.Text = "Remove Macro"
+
+local runBtn = Instance.new("TextButton", frame)
+runBtn.Size = UDim2.new(0.5, 0, 0, 40)
+runBtn.Position = UDim2.new(0.05, 0, 0, 170)
+runBtn.Text = "Run Macro"
+
+local listFrame = Instance.new("ScrollingFrame", frame)
+listFrame.Size = UDim2.new(0.9, 0, 0.3, 0)
+listFrame.Position = UDim2.new(0.05, 0, 0, 220)
+listFrame.CanvasSize = UDim2.new(0,0,5,0)
+listFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+listFrame.ScrollBarThickness = 6
+
+-- Macro storage
+local savedMacros = {}
+
+local function parseMacro(text)
+    -- Return structured macro table
+    local macros = {}
+    for weaponBlock in text:gmatch("%?%w+.-(?=%?|$)") do
+        local weapon = weaponBlock:match("%?(%w+)")
+        local skills = {}
+        for skill, wait in weaponBlock:gmatch("(%w+) wait(%d+%.?%d*)") do
+            table.insert(skills, {Skill=skill:lower(), HoldTime=tonumber(wait)})
+        end
+        table.insert(macros, {Weapon=weapon:lower(), Skills=skills})
+    end
+    return macros
+end
+
+local function runMacro(macro)
+    spawn(function()
+        for _, block in ipairs(macro) do
+            -- Equip weapon
+            print("Equipping", block.Weapon)
+            equip(block.Weapon) -- use your equip() function from your script
+            -- Run skills
+            for _, s in ipairs(block.Skills) do
+                print("Using", s.Skill, "HoldTime:", s.HoldTime)
+                down(s.Skill:upper(), s.HoldTime) -- use your down() function
+                task.wait(0.1) -- small delay between skills
+            end
+        end
+    end)
+end
+
+-- UI Events
+saveBtn.MouseButton1Click:Connect(function()
+    local text = textbox.Text
+    local parsed = parseMacro(text)
+    table.insert(savedMacros, parsed)
+
+    -- Update list
+    listFrame:ClearAllChildren()
+    for i, m in ipairs(savedMacros) do
+        local label = Instance.new("TextLabel", listFrame)
+        label.Size = UDim2.new(1,0,0,30)
+        label.Position = UDim2.new(0,0,(i-1)*35,0)
+        label.Text = "Macro "..i
+        label.BackgroundColor3 = Color3.fromRGB(50,50,50)
+        label.TextColor3 = Color3.fromRGB(255,255,255)
+    end
+end)
+
+removeBtn.MouseButton1Click:Connect(function()
+    table.remove(savedMacros)
+    listFrame:ClearAllChildren()
+    for i, m in ipairs(savedMacros) do
+        local label = Instance.new("TextLabel", listFrame)
+        label.Size = UDim2.new(1,0,0,30)
+        label.Position = UDim2.new(0,0,(i-1)*35,0)
+        label.Text = "Macro "..i
+        label.BackgroundColor3 = Color3.fromRGB(50,50,50)
+        label.TextColor3 = Color3.fromRGB(255,255,255)
+    end
+end)
+
+runBtn.MouseButton1Click:Connect(function()
+    for _, m in ipairs(savedMacros) do
+        runMacro(m)
+    end
+end)

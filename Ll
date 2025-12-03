@@ -47,8 +47,8 @@ if not Setting.Fruit then
         ["Enable"] = true,
         ["Z"] = {["Enable"] = true, ["HoldTime"] = 0.1},
         ["X"] = {["Enable"] = true, ["HoldTime"] = 0.1},
-        ["C"] = {["Enable"] = true, ["HoldTime"] = 0.4},
-        ["V"] = {["Enable"] = true, ["HoldTime"] = 0.4},
+        ["C"] = {["Enable"] = true, ["HoldTime"] = 1},
+        ["V"] = {["Enable"] = true, ["HoldTime"] = 1},
         ["F"] = {["Enable"] = true, ["HoldTime"] = 0.1},
         ["Delay"] = 1
     }

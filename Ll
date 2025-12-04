@@ -1,4 +1,4 @@
-local UI = loadstring(game:HttpGet("https://raw.githubusercontent.com/matharcho/ombooswaanammde/refs/heads/main/omswaa"))()
+local UI = loadstring(game:HttpGet("https://raw.githubusercontent.com/matharcho/ombooswaanammde/refs/heads/main/Nu"))()
 local Setting = _G.MeeTsuoAutoBountySettings
 
 if not Setting then

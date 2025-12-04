@@ -205,7 +205,7 @@ end
 local CurrentTargetLabel = Instance.new("TextLabel")
 CurrentTargetLabel.Name = "CurrentTargetLabel"
 CurrentTargetLabel.Parent = MainFrame
-CurrentTargetLabel.Position = UDim2.new(0.084, 0, 0.398, 0)
+CurrentTargetLabel.Position = UDim2.new(0.086, 0, 0.432, 0)
 CurrentTargetLabel.Size = UDim2.new(0.419, 0, 0.089, 0)
 CurrentTargetLabel.BackgroundTransparency = 1
 CurrentTargetLabel.TextColor3 = Color3.fromRGB(137, 205, 255)
@@ -234,7 +234,7 @@ local PermanentNote = Instance.new("TextLabel")
 PermanentNote.Name = "PermanentNote"
 PermanentNote.Parent = MainFrame
 PermanentNote.Size = UDim2.new(0.418, 0, 0.089, 0)
-PermanentNote.Position = UDim2.new(0.084, 0, 0.537, 0)
+PermanentNote.Position = UDim2.new(0.086, 0, 0.589, 0)
 PermanentNote.TextColor3 = NotifyColors.info
 PermanentNote.Font = Enum.Font.Fondamento
 PermanentNote.TextScaled = true
@@ -291,8 +291,8 @@ end
 local SkipButton = Instance.new("TextButton")
 SkipButton.Name = "SkipButton"
 SkipButton.Parent = MainFrame
-SkipButton.Size = UDim2.new(0.276, 0, 0.093, 0)
-SkipButton.Position = UDim2.new(0.13, 0, 0.718, 0)
+SkipButton.Size = UDim2.new(0.311, 0, 0.093, 0)
+SkipButton.Position = UDim2.new(0.145, 0, 0.796, 0)
 SkipButton.BackgroundTransparency = 1
 SkipButton.TextColor3 = Color3.fromRGB(137, 205, 255)
 SkipButton.Font = Enum.Font.Fondamento
@@ -321,7 +321,7 @@ local SpectateButton = Instance.new("TextButton")
 SpectateButton.Name = "SpectateButton"
 SpectateButton.Parent = MainFrame
 SpectateButton.Size = UDim2.new(0.311, 0, 0.093, 0)
-SpectateButton.Position = UDim2.new(0.139, 0, 0.859, 0)
+SpectateButton.Position = UDim2.new(0.54, 0, 0.796, 0)
 SpectateButton.BackgroundTransparency = 1
 SpectateButton.TextColor3 = Color3.fromRGB(137, 205, 255)
 SpectateButton.Font = Enum.Font.Fondamento
@@ -340,14 +340,7 @@ SpectateButton.MouseButton1Click:Connect(function()
     if getgenv().SpectateTarget then
         SpectateButton.BackgroundColor3 = Color3.fromRGB(80, 200, 80)
         SpectateButton.Text = "Spectate: ON"
-        
-        local list = getgenv().checked or {}
-	    if #list > 0 then
-	        getgenv().specIndex = table.find(list, getgenv().targ) or 1
-	    else
-	        getgenv().specIndex = 1
-	    end
-    
+
         if getgenv().targ and getgenv().targ.Character then
             workspace.CurrentCamera.CameraSubject = getgenv().targ.Character
         end
@@ -363,45 +356,11 @@ SpectateButton.MouseButton1Click:Connect(function()
     end
 end)
 
-local PrevSpec = Instance.new("TextButton")
-PrevSpec.Name = "PrevSpec"
-PrevSpec.Parent = MainFrame
-PrevSpec.Size = UDim2.new(0.108, 0, 0.093, 0)
-PrevSpec.Position = UDim2.new(0.014, 0, 0.859, 0)
-PrevSpec.BackgroundTransparency = 1
-PrevSpec.TextColor3 = Color3.fromRGB(137, 205, 255)
-PrevSpec.Font = Enum.Font.Fondamento
-PrevSpec.TextScaled = true
-PrevSpec.Text = "<"
-ApplyBorder(PrevSpec)
-Instance.new("UICorner", PrevSpec).CornerRadius = UDim.new(0, 10)
-
-local NextSpec = Instance.new("TextButton")
-NextSpec.Name = "NextSpec"
-NextSpec.Parent = MainFrame
-NextSpec.Size = UDim2.new(0.108, 0, 0.093, 0)
-NextSpec.Position = UDim2.new(0.465, 0, 0.859, 0)
-NextSpec.BackgroundTransparency = 1
-NextSpec.TextColor3 = Color3.fromRGB(137, 205, 255)
-NextSpec.Font = Enum.Font.Fondamento
-NextSpec.TextScaled = true
-NextSpec.Text = ">"
-ApplyBorder(NextSpec)
-Instance.new("UICorner", NextSpec).CornerRadius = UDim.new(0, 10)
-
-PrevSpec.MouseButton1Click:Connect(function()
-    getgenv().SpectatePreviousTarget = true
-end)
-
-NextSpec.MouseButton1Click:Connect(function()
-    getgenv().SpectateNextTarget = true
-end)
-
 local TranButton = Instance.new("TextButton")
 TranButton.Name = "TranButton"
 TranButton.Parent = MainFrame
-TranButton.Size = UDim2.new(0.283, 0, 0.093, 0)
-TranButton.Position = UDim2.new(0.308, 0, 0.716, 0)
+TranButton.Size = UDim2.new(0.331, 0, 0.079, 0)
+TranButton.Position = UDim2.new(0.612, 0, 0.649, 0)
 TranButton.BackgroundTransparency = 1
 TranButton.TextColor3 = Color3.fromRGB(137, 205, 255)
 TranButton.Font = Enum.Font.Fondamento

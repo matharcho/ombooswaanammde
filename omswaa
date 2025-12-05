@@ -5,12 +5,6 @@ local Player = Players.LocalPlayer
 local PlayerGui = Player:WaitForChild("PlayerGui")
 local TweenService = game:GetService("TweenService")
 local UIS = game:GetService("UserInputService")
-local GuiService = game:GetService("GuiService")
-
-local links = {
-    MeeTsuo = "https://discord.gg/UAUr9JVBA",
-    Sherman = "https://discord.gg/tQn6dSvAc"
-}
 
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "MHub"
@@ -458,88 +452,6 @@ MiniIcon.InputEnded:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 then
         draggingMini = false
     end
-end)
-
-local screenGui2 = Instance.new("ScreenGui")
-screenGui2.Name = "DiscordJoinTiny"
-screenGui2.ResetOnSpawn = false
-screenGui2.Parent = Player:WaitForChild("PlayerGui")
-
-local closeButton = Instance.new("TextButton")
-closeButton.Size = UDim2.new(0, 25, 0, 25)
-closeButton.Position = UDim2.new(1, -45, 1, -110)
-closeButton.BackgroundTransparency = 1
-closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-closeButton.Text = "X"
-closeButton.Font = Enum.Font.SourceSansBold
-closeButton.TextSize = 18
-closeButton.Parent = screenGui2
-
-local meeTsuoButton = Instance.new("TextButton")
-meeTsuoButton.Size = UDim2.new(0, 90, 0, 25)
-meeTsuoButton.Position = UDim2.new(1, -130, 1, -70)
-meeTsuoButton.BackgroundTransparency = 1
-meeTsuoButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-meeTsuoButton.Text = "Join MeeTsuo Server For Bugs/Suggestions"
-meeTsuoButton.Font = Enum.Font.SourceSansBold
-meeTsuoButton.TextSize = 16
-meeTsuoButton..TextScaled = true
-meeTsuoButton..TextWrapped = true
-meeTsuoButton.Parent = screenGui2
-
-local shermanButton = Instance.new("TextButton")
-shermanButton.Size = UDim2.new(0, 90, 0, 25)
-shermanButton.Position = UDim2.new(1, -130, 1, -40)
-shermanButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-shermanButton.BackgroundTransparency = 1
-shermanButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-shermanButton.Text = "Join Sherman Discord Server"
-shermanButton.Font = Enum.Font.SourceSansBold
-shermanButton.TextSize = 16
-shermanButton.TextScaled = true
-shermanButton.TextWrapped = true
-shermanButton.Parent = screenGui2
-
-local function flashStatus(btn, text, t)
-    local old = btn.Text
-    btn.Text = text
-    btn.Active = false
-    task.delay(t or 2, function()
-        if btn and btn.Parent then
-            btn.Text = old
-            btn.Active = true
-        end
-    end)
-end
-
-local function tryCopyOrOpen(link, btn)
-    if typeof(setclipboard) == "function" then
-        setclipboard(link)
-        flashStatus(btn, "Copied!")
-        return
-    end
-
-    local ok = pcall(function()
-        GuiService:OpenBrowserWindow(link)
-    end)
-    if ok then
-        flashStatus(btn, "Opening...")
-        return
-    end
-
-    flashStatus(btn, link, 4)
-end
-
-meeTsuoButton.Activated:Connect(function()
-    tryCopyOrOpen(links.MeeTsuo, meeTsuoButton)
-end)
-
-shermanButton.Activated:Connect(function()
-    tryCopyOrOpen(links.Sherman, shermanButton)
-end)
-
-closeButton.Activated:Connect(function()
-    screenGui2:Destroy()
 end)
 
 return UI

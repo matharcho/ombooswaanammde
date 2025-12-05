@@ -454,4 +454,43 @@ MiniIcon.InputEnded:Connect(function(input)
     end
 end)
 
+local SG = game:GetService("StarterGui")
+
+local function ShowNotify(title, text, link)
+    SG:SetCore("SendNotification", {
+        Title = title,
+        Text = text,
+        Duration = 1e9,
+        Button1 = "Copy Link",
+        Button2 = "Close",
+        Callback = function(button)
+            if button == "Copy Link" then
+                setclipboard(link)
+            elseif button == "Close" then
+                SG:SetCore("SendNotification", {
+                    Title = "Ok",
+                    Text = "Alright",
+                    Duration = 3
+                })
+            end
+        end
+    })
+end
+
+task.wait(5)
+
+ShowNotify(
+    "MeeTsuo Server Report Bugs or Suggestions",
+    "Join MeeTsuo Discord Server!",
+    "https://discord.gg/UAUr9JVBA"
+)
+
+task.wait(1)
+
+ShowNotify(
+    "Sherman Server",
+    "Join Sherman Discord Server!",
+    "https://discord.gg/tQn6dSvAc"
+)
+
 return UI

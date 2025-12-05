@@ -454,18 +454,4 @@ MiniIcon.InputEnded:Connect(function(input)
     end
 end)
 
-local SG = game:GetService("StarterGui")
-
-local function Notif(msg)
-    SG:SetCore("SendNotification", {
-        Title = "Hello Guys Info!",
-        Text = msg,
-        Duration = 5
-    })
-end
-
-task.wait(5)
-
-Notif("Keysystem Will Reset Tomorrow At 7pm(old key not work after keysystem reset)")
-
 return UI

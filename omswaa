@@ -456,7 +456,7 @@ end)
 
 local SG = game:GetService("StarterGui")
 
-local function Notify(msg)
+local function Notif(msg)
     SG:SetCore("SendNotification", {
         Title = "Hello Guys Info!",
         Text = msg,
@@ -466,6 +466,6 @@ end
 
 task.wait(5)
 
-Notify(Keysystem Will Reset Tomorrow At 7pm(old key not work after keysystem reset)")
+Notif("Keysystem Will Reset Tomorrow At 7pm(old key not work after keysystem reset)")
 
 return UI

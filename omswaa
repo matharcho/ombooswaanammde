@@ -456,6 +456,14 @@ end)
 
 local SG = game:GetService("StarterGui")
 
+local function copyToClipboard(text)
+    if syn and syn.write_clipboard then
+        syn.write_clipboard(text)
+    elseif setclipboard then
+        setclipboard(text)
+    end
+end
+
 local function ShowNotify(title, text, link)
     SG:SetCore("SendNotification", {
         Title = title,
@@ -465,7 +473,7 @@ local function ShowNotify(title, text, link)
         Button2 = "Close",
         Callback = function(button)
             if button == "Copy Link" then
-                setclipboard(link)
+                copyToClipboard(link)
             elseif button == "Close" then
                 SG:SetCore("SendNotification", {
                     Title = "Ok",
@@ -486,6 +494,12 @@ ShowNotify(
 )
 
 task.wait(1)
+
+ShowNotify(
+    "Sherman Server",
+    "Join Sherman Discord Server!",
+    "https://discord.gg/tQn6dSvAc"
+)
 
 ShowNotify(
     "Sherman Server",

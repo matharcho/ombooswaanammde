@@ -466,6 +466,6 @@ end
 
 task.wait(5)
 
-Notify("Keysystem will reset in tomorrow at 7pm and old key will not work")
+Notify("Keysystem will reset in today at 7pm and old key will not work")
 
 return UI

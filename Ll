@@ -2693,5 +2693,3 @@ do
     -- Ensure default-enabled behavior on first load
     if antiAfk.enabled then AA_Start() end
 end
-
-end)
